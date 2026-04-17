@@ -15,18 +15,11 @@ services:
         condition: service_healthy
       evolution-redis:
         condition: service_healthy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080"]
-      interval: 30s
-      timeout: 15s
-      retries: 5
-      start_period: 30s
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.evolution.rule=Host(`evolution.berguecio.cl`)"
       - "traefik.http.routers.evolution.entrypoints=websecure"
       - "traefik.http.routers.evolution.tls=true"
-      - "traefik.http.routers.evolution.priority=100"
       - "traefik.http.services.evolution.loadbalancer.server.port=8080"
       - "traefik.docker.network=proxy"
       - "monitoring.url=https://evolution.berguecio.cl"

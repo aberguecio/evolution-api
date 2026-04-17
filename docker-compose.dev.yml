@@ -13,12 +13,12 @@ services:
     networks:
       - evolution-network
     depends_on:
-      postgres:
+      evolution-postgres:
         condition: service_healthy
-      redis:
+      evolution-redis:
         condition: service_healthy
 
-  postgres:
+  evolution-postgres:
     image: postgres:15-alpine
     container_name: evolution-postgres
     restart: always
@@ -36,7 +36,7 @@ services:
       timeout: 3s
       retries: 5
 
-  redis:
+  evolution-redis:
     image: redis:latest
     container_name: evolution-redis
     restart: always
